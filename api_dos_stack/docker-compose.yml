@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db_dos:
+    image: mongo
+    ports:
+      - '27018:27017'
+  api_dos:
+    container_name: api-dos
+    build:
+      context: ../node-demo-app
+    ports:
+      - '3001:3000'
+    depends_on:
+      - db_dos
+  networks:
+    - testnet
+
+networks:
+  testnet:
+    external:
+      name: testnet

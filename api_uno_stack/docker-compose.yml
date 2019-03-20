@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db_uno:
+    image: mongo
+    ports:
+      - '27017:27017'
+  api_uno:
+    container_name: api-uno
+    build:
+      context: ../node-demo-app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db_uno
+    networks:
+      - testnet
+
+networks:
+  testnet:
+    external:
+      name: testnet

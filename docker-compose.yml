@@ -1,0 +1,21 @@
+version: '3'
+services:
+  gateway:
+    image: wardviaene/node-demo-app
+    networks:
+      - testnet
+
+  portainer:
+    image: portainer/portainer
+    command: -H unix:///var/run/docker.sock
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.data/portainer:/data
+
+networks:
+  testnet:
+    external:
+      name: testnet
